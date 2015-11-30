@@ -9,6 +9,8 @@
 
 `$ python iris.py 6.7 3.2 5.7 2.0`
 
+>`Training Accuracy :  96.67 %`
+>
 >`Species - Iris Virginica`
 
 

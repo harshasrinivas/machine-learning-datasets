@@ -69,6 +69,29 @@ def main():
 	theta2 = gradient(x, y2, theta)
 	theta3 = gradient(x, y3, theta)
 
+	test = np.loadtxt(filename, delimiter=',', usecols=[0,1,2,3])
+	test = np.c_[np.ones(m), test]
+
+	test_y = np.loadtxt(filename, delimiter=',', usecols=[4], dtype='|S15')
+
+	# training accuracy
+
+	setosa = sigmoid(np.dot(theta1.T, test.T)).T
+	versicolor = sigmoid(np.dot(theta2.T, test.T)).T
+	virginica = sigmoid(np.dot(theta3.T, test.T)).T
+	prob = []
+	
+	for i in range(0,m):
+		probability = max(setosa[i], versicolor[i], virginica[i])
+		if probability == setosa[i]:
+			prob.append('Iris-setosa')
+		if probability == versicolor[i]:
+			prob.append('Iris-versicolor')
+		if probability == virginica[i]:
+			prob.append('Iris-virginica')
+	ratio = float(sum((prob == classify)*100))/m
+	print "Training Accuracy : ", "%.2f" % ratio, "%"
+
 	sample = np.array([1.0,float(sys.argv[1]),float(sys.argv[2]),\
 									float(sys.argv[3]),float(sys.argv[4])])
 	
